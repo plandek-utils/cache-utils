@@ -1,0 +1,13 @@
+{
+  "deno.enable": true,
+  "editor.tabSize": 2,
+  "cSpell.words": [
+    "datasources",
+    "eturino",
+    "lcov",
+    "pino",
+    "plandek",
+    "simplytyped"
+  ],
+  "cSpell.language": "en-GB"
+}
