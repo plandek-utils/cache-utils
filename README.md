@@ -3,8 +3,8 @@
 [![JSR Scope](https://jsr.io/badges/@plandek-utils)](https://jsr.io/@plandek-utils)
 [![JSR](https://jsr.io/badges/@plandek-utils/cache-utils)](https://jsr.io/@plandek-utils/cache-utils)
 [![JSR Score](https://jsr.io/badges/@plandek-utils/cache-utils/score)](https://jsr.io/@plandek-utils/cache-utils)
-[![Maintainability](https://api.codeclimate.com/v1/badges/XXXXXXXX/maintainability)](https://codeclimate.com/github/plandek-utils/cache-utils/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/XXXXXXXX/test_coverage)](https://codeclimate.com/github/plandek-utils/cache-utils/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f05fb327b37d0d69b030/maintainability)](https://codeclimate.com/github/plandek-utils/cache-utils/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f05fb327b37d0d69b030/test_coverage)](https://codeclimate.com/github/plandek-utils/cache-utils/test_coverage)
 
 `CleanableRedisCache`, a `KeyValueCache`-compatible class, which allows for cleaning by pattern. It stores string values.
 

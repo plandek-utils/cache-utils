@@ -23,7 +23,7 @@ jobs:
 
       - uses: paambaati/codeclimate-action@v9.0.0
         env:
-          CC_TEST_REPORTER_ID: b59d2b6a88800203fa451ad1b96bb55a0dc858efa8eabb601e4d3b2643d3d35c
+          CC_TEST_REPORTER_ID: 082ddd43b80aa296256aade682aca98e557c1736dc999aa13001e3700a643992
         with:
           coverageCommand: deno run ci
           coverageLocations: |
