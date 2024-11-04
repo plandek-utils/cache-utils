@@ -8,3 +8,7 @@ RUN sed -i 's/Components: main/Components: main contrib non-free non-free-firmwa
 RUN apt-get -y update && apt-get -y --no-install-recommends install lcov && apt-get clean
 
 RUN npm install --global light-release@2.3
+
+RUN git config --global --add safe.directory /workspaces/cache-utils
+
+ENV DENO_DIR=/workspaces/cache-utils/.deno_cache

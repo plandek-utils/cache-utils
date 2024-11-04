@@ -4,10 +4,12 @@
   "cSpell.words": [
     "datasources",
     "eturino",
+    "genhtml",
     "lcov",
     "pino",
     "plandek",
-    "simplytyped"
+    "simplytyped",
+    "stringifying"
   ],
   "cSpell.language": "en-GB"
 }

@@ -23,7 +23,8 @@
         "ms-azuretools.vscode-docker",
         "EditorConfig.EditorConfig",
         "GitHub.copilot",
-        "phind.phind"
+        "phind.phind",
+        "eamodio.gitlens"
       ]
     }
   }

@@ -1,7 +1,9 @@
-node_modules
-dist
 .DS_Store
-/coverage
+/.deno_cache
 /.env
-/cov.lcov
+/coverage
+/coverage.lcov
 /html_cov
+/tmp_cov
+dist
+node_modules

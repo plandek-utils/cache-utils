@@ -1,39 +1,49 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@std/assert@1": "1.0.6",
-    "jsr:@std/assert@^1.0.6": "1.0.6",
-    "jsr:@std/async@^1.0.5": "1.0.7",
+    "jsr:@plandek-utils/plain-object@0.2.3": "0.2.3",
+    "jsr:@std/assert@1": "1.0.7",
+    "jsr:@std/assert@1.0.7": "1.0.7",
+    "jsr:@std/assert@^1.0.7": "1.0.7",
+    "jsr:@std/async@^1.0.8": "1.0.8",
     "jsr:@std/data-structures@^1.0.4": "1.0.4",
-    "jsr:@std/expect@^1.0.6": "1.0.6",
-    "jsr:@std/fs@^1.0.4": "1.0.5",
-    "jsr:@std/internal@^1.0.4": "1.0.4",
-    "jsr:@std/path@^1.0.6": "1.0.7",
-    "jsr:@std/path@^1.0.7": "1.0.7",
-    "jsr:@std/testing@^1.0.3": "1.0.3",
-    "npm:@apollo/utils.keyvaluecache@^3.1.0": "3.1.0",
-    "npm:@eturino/ioredis-del-by-pattern@^2.0.1": "2.0.1",
-    "npm:@types/ioredis-mock@^8.2.5": "8.2.5",
-    "npm:ioredis-mock@^8.9.0": "8.9.0_@types+ioredis-mock@8.2.5_ioredis@5.4.1_fengari@0.1.4",
-    "npm:ioredis@^5.4.1": "5.4.1"
+    "jsr:@std/expect@1.0.7": "1.0.7",
+    "jsr:@std/fs@^1.0.5": "1.0.5",
+    "jsr:@std/internal@^1.0.5": "1.0.5",
+    "jsr:@std/path@^1.0.7": "1.0.8",
+    "jsr:@std/path@^1.0.8": "1.0.8",
+    "jsr:@std/testing@1.0.4": "1.0.4",
+    "npm:@apollo/utils.keyvaluecache@3.1.0": "3.1.0",
+    "npm:@eturino/ioredis-del-by-pattern@2.0.1": "2.0.1",
+    "npm:@plandek-utils/ts-parse-dayjs@^5.1.0": "5.1.0",
+    "npm:@types/ioredis-mock@*": "8.2.5",
+    "npm:@types/ioredis-mock@8.2.5": "8.2.5",
+    "npm:ioredis-mock@8.9.0": "8.9.0_@types+ioredis-mock@8.2.5_ioredis@5.4.1_fengari@0.1.4",
+    "npm:ioredis@5.4.1": "5.4.1"
   },
   "jsr": {
-    "@std/assert@1.0.6": {
-      "integrity": "1904c05806a25d94fe791d6d883b685c9e2dcd60e4f9fc30f4fc5cf010c72207",
+    "@plandek-utils/plain-object@0.2.3": {
+      "integrity": "88c572728f419a363f22b27c7fe6427dc748697b7ca750c844719af42d3e3ab8",
+      "dependencies": [
+        "npm:@plandek-utils/ts-parse-dayjs"
+      ]
+    },
+    "@std/assert@1.0.7": {
+      "integrity": "64ce9fac879e0b9f3042a89b3c3f8ccfc9c984391af19e2087513a79d73e28c3",
       "dependencies": [
         "jsr:@std/internal"
       ]
     },
-    "@std/async@1.0.7": {
-      "integrity": "f4fadc0124432e37cba11e8b3880164661a664de00a65118d976848f32f96290"
+    "@std/async@1.0.8": {
+      "integrity": "c057c5211a0f1d12e7dcd111ab430091301b8d64b4250052a79d277383bc3ba7"
     },
     "@std/data-structures@1.0.4": {
       "integrity": "fa0e20c11eb9ba673417450915c750a0001405a784e2a4e0c3725031681684a0"
     },
-    "@std/expect@1.0.6": {
-      "integrity": "dffba969ca5ea6d7c39338d4985c9af2bfa6e080c710cc2b77756dd7657c369c",
+    "@std/expect@1.0.7": {
+      "integrity": "3904afa77cfe5c45dd2cd2c476e6fc5b6f57103d712890f0783d74c19d4b05a9",
       "dependencies": [
-        "jsr:@std/assert@^1.0.6",
+        "jsr:@std/assert@^1.0.7",
         "jsr:@std/internal"
       ]
     },
@@ -43,21 +53,21 @@
         "jsr:@std/path@^1.0.7"
       ]
     },
-    "@std/internal@1.0.4": {
-      "integrity": "62e8e4911527e5e4f307741a795c0b0a9e6958d0b3790716ae71ce085f755422"
+    "@std/internal@1.0.5": {
+      "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     },
-    "@std/path@1.0.7": {
-      "integrity": "76a689e07f0e15dcc6002ec39d0866797e7156629212b28f27179b8a5c3b33a1"
+    "@std/path@1.0.8": {
+      "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
     },
-    "@std/testing@1.0.3": {
-      "integrity": "f98c2bee53860a5916727d7e7d3abe920dd6f9edace022e2d059f00d05c2cf42",
+    "@std/testing@1.0.4": {
+      "integrity": "ca1368d720b183f572d40c469bb9faf09643ddd77b54f8b44d36ae6b94940576",
       "dependencies": [
-        "jsr:@std/assert@^1.0.6",
+        "jsr:@std/assert@^1.0.7",
         "jsr:@std/async",
         "jsr:@std/data-structures",
         "jsr:@std/fs",
         "jsr:@std/internal",
-        "jsr:@std/path@^1.0.6"
+        "jsr:@std/path@^1.0.8"
       ]
     }
   },
@@ -84,6 +94,13 @@
     "@ioredis/commands@1.2.0": {
       "integrity": "sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg=="
     },
+    "@plandek-utils/ts-parse-dayjs@5.1.0": {
+      "integrity": "sha512-pUGSIs75EENVP2gFTfLxmuVX45oQMpTxGbnLMnPdGI1HLf3EEfFjzGDhsx27NbKEEve88r7N3JIqoepUjEv0og==",
+      "dependencies": [
+        "dayjs",
+        "lodash"
+      ]
+    },
     "@types/ioredis-mock@8.2.5": {
       "integrity": "sha512-cZyuwC9LGtg7s5G9/w6rpy3IOZ6F/hFR0pQlWYZESMo1xQUYbDpa6haqB4grTePjsGzcB/YLBFCjqRunK5wieg==",
       "dependencies": [
@@ -99,6 +116,9 @@
     },
     "cluster-key-slot@1.1.2": {
       "integrity": "sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA=="
+    },
+    "dayjs@1.11.13": {
+      "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg=="
     },
     "debug@4.3.7": {
       "integrity": "sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==",
@@ -155,6 +175,9 @@
     "lodash.isarguments@3.1.0": {
       "integrity": "sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg=="
     },
+    "lodash@4.17.21": {
+      "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
+    },
     "lru-cache@10.4.3": {
       "integrity": "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ=="
     },
@@ -197,14 +220,15 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/assert@1",
-      "jsr:@std/expect@^1.0.6",
-      "jsr:@std/testing@^1.0.3",
-      "npm:@apollo/utils.keyvaluecache@^3.1.0",
-      "npm:@eturino/ioredis-del-by-pattern@^2.0.1",
-      "npm:@types/ioredis-mock@^8.2.5",
-      "npm:ioredis-mock@^8.9.0",
-      "npm:ioredis@^5.4.1"
+      "jsr:@plandek-utils/plain-object@0.2.3",
+      "jsr:@std/assert@1.0.7",
+      "jsr:@std/expect@1.0.7",
+      "jsr:@std/testing@1.0.4",
+      "npm:@apollo/utils.keyvaluecache@3.1.0",
+      "npm:@eturino/ioredis-del-by-pattern@2.0.1",
+      "npm:@types/ioredis-mock@8.2.5",
+      "npm:ioredis-mock@8.9.0",
+      "npm:ioredis@5.4.1"
     ]
   }
 }
