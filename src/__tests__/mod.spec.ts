@@ -10,10 +10,15 @@ import type { Redis } from "ioredis";
 import type { RedisDelByPatternOptions } from "@eturino/ioredis-del-by-pattern";
 
 import type { DelFn } from "../mod.ts";
-import { disconnectedCleanableRedisCache } from "../mod.ts";
+import { disconnectedCleanableRedisCache, NoOpCache } from "../mod.ts";
+import { PlainObjectCache } from "../mod.ts";
+
+const JSON_VALUE = { foo: "bar" };
+const JSON_VALUE_SERIALISED = JSON.stringify(JSON_VALUE);
 
 function buildRedisStubbed(
-  opts: { expectSet?: boolean; expectGet?: "with-value" | "without-value" | false; expectDel?: boolean } = {},
+  opts: { expectSet?: boolean; expectGet?: "with-value" | "with-json" | "without-value" | false; expectDel?: boolean } =
+    {},
 ) {
   const redis = new redisMock.default({});
   const setStub = (opts.expectSet
@@ -33,6 +38,8 @@ function buildRedisStubbed(
 
   const getStub = opts.expectGet === "with-value"
     ? stub(redis, "get", () => Promise.resolve("VALUE"))
+    : opts.expectGet === "with-json"
+    ? stub(redis, "get", () => Promise.resolve(JSON_VALUE_SERIALISED))
     : opts.expectGet === "without-value"
     ? stub(redis, "get", () => Promise.resolve(null))
     : stub(redis, "get", () => Promise.reject("should not be called"));
@@ -166,5 +173,77 @@ describe("CleanableRedisCache", () => {
       const res = await crc.clearClient(clientKey);
       expect(res).toEqual(3);
     });
+  });
+});
+
+describe("PlainObjectCache", () => {
+  describe("#set()", () => {
+    it("serialises the plain object into json and calls internalCache.set with it", async () => {
+      using redisStubs = buildRedisStubbed({ expectSet: true });
+      const crc = disconnectedCleanableRedisCache(redisStubs.redis);
+      const cache = new PlainObjectCache(crc);
+
+      await cache.set("key", JSON_VALUE);
+
+      assertSpyCall(redisStubs.setStub, 0, {
+        args: ["<test>key", JSON_VALUE_SERIALISED, "PX", 0],
+      });
+    });
+  });
+
+  describe("#get()", () => {
+    it("parses as JSON the retrieved value", async () => {
+      using redisStubs = buildRedisStubbed({ expectGet: "with-json" });
+      const crc = disconnectedCleanableRedisCache(redisStubs.redis);
+      const cache = new PlainObjectCache(crc);
+
+      const result = await cache.get("key");
+
+      expect(result).toEqual(JSON_VALUE);
+    });
+
+    it("works with cache miss", async () => {
+      using redisStubs = buildRedisStubbed({ expectGet: "without-value" });
+      const crc = disconnectedCleanableRedisCache(redisStubs.redis);
+      const cache = new PlainObjectCache(crc);
+
+      const result = await cache.get("key");
+
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe("#delete()", () => {
+    it("passes the call to the internal cache", async () => {
+      using redisStubs = buildRedisStubbed({ expectDel: true });
+      const crc = disconnectedCleanableRedisCache(redisStubs.redis);
+      const cache = new PlainObjectCache(crc);
+
+      await cache.delete("key");
+
+      assertSpyCall(redisStubs.delStub, 0, {
+        args: ["<test>key"],
+      });
+    });
+  });
+});
+
+describe("NoOpCache", () => {
+  it("should always return undefined for get", async () => {
+    const noOpCache = new NoOpCache<unknown>();
+    const result = await noOpCache.get("some-key");
+    expect(result).toBeUndefined();
+  });
+
+  it("should do nothing for set", async () => {
+    const noOpCache = new NoOpCache<unknown>();
+    await noOpCache.set("some-key", "whatever");
+    expect(true).toBeTruthy(); // This test passes because set doesn't throw any errors
+  });
+
+  it("should do nothing for delete", async () => {
+    const noOpCache = new NoOpCache<unknown>();
+    await noOpCache.delete("some-key");
+    expect(true).toBeTruthy(); // This test passes because delete doesn't throw any errors
   });
 });

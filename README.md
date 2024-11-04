@@ -10,6 +10,38 @@
 
 ## Usage
 
+### `PlainObjectCache`
+
+Adaptor for a `KeyValueCache<string>` to `KeyValueCache<PlainObject>`, using JSON.parse and JSON.stringify
+
+```ts
+import { PlainObjectCache } from "@plandek-utils/cache-utils";
+
+async function doStuff(internalCache: KeyValueCache<string>) {
+  const cache = new PlainObjectCache(internalCache);
+
+  await cache.get("missing"); // Promise of undefined
+  await cache.set("some-key", { "a": 1 }); // calls internalCache.set("some-key", "{\"a\":1}")
+  await cache.get("some-key"); // Promise of { "a": 1 } (parsed)
+  await cache.delete("some-key"); // calls internalCache.delete("some-key")
+}
+
+```
+
+### `NoOpCache`
+
+`KeyValueCache` that does nothing, useful for tests or to disable cache with minimal impact.
+
+```ts
+import { NoOpCache } from "@plandek-utils/cache-utils";
+
+const cache = new NoOpCache<string>();
+await cache.get("any-key") // Promise of undefined
+await cache.set("any-key", "any value") // Promise of void -> does not store anything in any cache
+await cache.delete("any-key") // Promise of void -> does not delete anything from any cache
+
+```
+
 ### `clientMainCachePrefix(clientKey: string): string`
 
 Function that ensures we use the same convention for caching prefixes by clientKey
@@ -81,6 +113,5 @@ This package is developed with deno 2. The production code is in `src/mod.ts` an
 
 - `deno fmt src`: format files
 - `deno lint src`: lint files
-- `deno dev`: run tests on each change in mod.ts
-- `deno run test && deno run lcov && deno run html`: run the tests with coverage, then convert to lcov and prepare in
+- `deno run ci`: run the tests with coverage, then convert to lcov and prepare in
   `html_cov` an HTML export of the coverage info.

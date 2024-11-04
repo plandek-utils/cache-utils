@@ -1,6 +1,6 @@
 import type { KeyValueCache, KeyValueCacheSetOptions } from "@apollo/utils.keyvaluecache";
-
 import { redisDelByPattern, RedisDeletionMethod } from "@eturino/ioredis-del-by-pattern";
+import type { PlainObject } from "@plandek-utils/plain-object";
 import type { Redis } from "ioredis";
 
 /**
@@ -197,6 +197,72 @@ export function disconnectedCleanableRedisCache(redis: Redis, delFn?: DelFn): Cl
   });
   c.disconnect();
   return c;
+}
+
+/**
+ * Adaptor for a KeyValueCache<string> to KeyValueCache<PlainObject>, using JSON.parse and JSON.stringify
+ */
+export class PlainObjectCache implements KeyValueCache<PlainObject> {
+  constructor(readonly cache: KeyValueCache<string>) {}
+
+  /**
+   * Calls `cache.get` with the given key and parses the value as JSON if it is truthy, undefined otherwise.
+   * @param key
+   * @returns
+   */
+  public async get(key: string): Promise<PlainObject | undefined> {
+    const value = await this.cache.get(key);
+    return value ? JSON.parse(value) : undefined;
+  }
+
+  /**
+   * Calls `cache.set` with the given key and value, stringifying the value.
+   * @param key
+   * @param value
+   * @param options
+   * @returns
+   */
+  public set(key: string, value: PlainObject, options?: KeyValueCacheSetOptions): Promise<void> {
+    return this.cache.set(key, JSON.stringify(value), options);
+  }
+
+  /**
+   * Calls `cache.delete` with the given key.
+   * @param key
+   * @returns
+   */
+  public delete(key: string): Promise<boolean | void> {
+    return this.cache.delete(key);
+  }
+}
+
+/**
+ * KeyValueCache that does nothing, useful for tests or to disable cache with minimal impact.
+ */
+export class NoOpCache<T = unknown> implements KeyValueCache<T> {
+  /**
+   * Always returns `undefined`
+   * @returns Promise<undefined>
+   */
+  get(_key: string): Promise<T | undefined> {
+    return Promise.resolve(undefined);
+  }
+
+  /**
+   * Does nothing
+   * @returns Promise<void>
+   */
+  set(_key: string, _value: T, _options?: KeyValueCacheSetOptions | undefined): Promise<void> {
+    return Promise.resolve();
+  }
+
+  /**
+   * Does nothing
+   * @returns Promise<void>
+   */
+  delete(_key: string): Promise<boolean | void> {
+    return Promise.resolve();
+  }
 }
 
 // INTERNAL
