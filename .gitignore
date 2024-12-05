@@ -2,6 +2,7 @@
 /.deno_cache
 /.env
 /coverage
+/tmp_cov
 /coverage.lcov
 /html_cov
 /tmp_cov

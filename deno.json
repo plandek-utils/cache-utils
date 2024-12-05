@@ -6,7 +6,8 @@
     "release": "npx light-release && deno fmt",
     "outdated": "deno run -rA jsr:@check/deps",
     "nuke": "deno clean && rm -rf node_modules tmp_cov coverage.lcov html_cov && deno install --allow-scripts",
-    "ci": "NODE_ENV=test deno test --coverage=tmp_cov --allow-sys --allow-env src && deno coverage --lcov --output=coverage.lcov tmp_cov",
+    "ci": "deno run check && rm -rf tmp_cov && deno run test && deno run lcov",
+    "check": "deno fmt --check && deno lint && deno check src",
     "test": "NODE_ENV=test deno test --coverage=tmp_cov --allow-sys --allow-env src",
     "lcov": "deno coverage --lcov --output=coverage.lcov tmp_cov",
     "html": "genhtml -o html_cov coverage.lcov"
@@ -15,10 +16,10 @@
   "imports": {
     "@apollo/utils.keyvaluecache": "npm:@apollo/utils.keyvaluecache@3.1.0",
     "@eturino/ioredis-del-by-pattern": "npm:@eturino/ioredis-del-by-pattern@2.0.1",
-    "@plandek-utils/plain-object": "jsr:@plandek-utils/plain-object@0.2.3",
-    "@std/assert": "jsr:@std/assert@1.0.7",
-    "@std/expect": "jsr:@std/expect@1.0.7",
-    "@std/testing": "jsr:@std/testing@1.0.4",
+    "@plandek-utils/plain-object": "npm:@plandek-utils/plain-object@1.1.0",
+    "@std/assert": "jsr:@std/assert@1.0.8",
+    "@std/expect": "jsr:@std/expect@1.0.8",
+    "@std/testing": "jsr:@std/testing@1.0.5",
     "@types/ioredis-mock": "npm:@types/ioredis-mock@8.2.5",
     "ioredis": "npm:ioredis@5.4.1",
     "ioredis-mock": "npm:ioredis-mock@8.9.0"

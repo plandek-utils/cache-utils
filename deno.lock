@@ -1,56 +1,47 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@plandek-utils/plain-object@0.2.3": "0.2.3",
-    "jsr:@std/assert@1": "1.0.7",
-    "jsr:@std/assert@1.0.7": "1.0.7",
-    "jsr:@std/assert@^1.0.7": "1.0.7",
-    "jsr:@std/async@^1.0.8": "1.0.8",
+    "jsr:@std/assert@1.0.8": "1.0.8",
+    "jsr:@std/assert@^1.0.8": "1.0.8",
+    "jsr:@std/async@^1.0.8": "1.0.9",
     "jsr:@std/data-structures@^1.0.4": "1.0.4",
-    "jsr:@std/expect@1.0.7": "1.0.7",
-    "jsr:@std/fs@^1.0.5": "1.0.5",
+    "jsr:@std/expect@1.0.8": "1.0.8",
+    "jsr:@std/fs@^1.0.5": "1.0.6",
     "jsr:@std/internal@^1.0.5": "1.0.5",
-    "jsr:@std/path@^1.0.7": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
-    "jsr:@std/testing@1.0.4": "1.0.4",
+    "jsr:@std/testing@1.0.5": "1.0.5",
     "npm:@apollo/utils.keyvaluecache@3.1.0": "3.1.0",
     "npm:@eturino/ioredis-del-by-pattern@2.0.1": "2.0.1",
-    "npm:@plandek-utils/ts-parse-dayjs@^5.1.0": "5.1.0",
+    "npm:@plandek-utils/plain-object@1.1.0": "1.1.0_zod@3.23.8",
     "npm:@types/ioredis-mock@*": "8.2.5",
     "npm:@types/ioredis-mock@8.2.5": "8.2.5",
     "npm:ioredis-mock@8.9.0": "8.9.0_@types+ioredis-mock@8.2.5_ioredis@5.4.1_fengari@0.1.4",
     "npm:ioredis@5.4.1": "5.4.1"
   },
   "jsr": {
-    "@plandek-utils/plain-object@0.2.3": {
-      "integrity": "88c572728f419a363f22b27c7fe6427dc748697b7ca750c844719af42d3e3ab8",
-      "dependencies": [
-        "npm:@plandek-utils/ts-parse-dayjs"
-      ]
-    },
-    "@std/assert@1.0.7": {
-      "integrity": "64ce9fac879e0b9f3042a89b3c3f8ccfc9c984391af19e2087513a79d73e28c3",
+    "@std/assert@1.0.8": {
+      "integrity": "ebe0bd7eb488ee39686f77003992f389a06c3da1bbd8022184804852b2fa641b",
       "dependencies": [
         "jsr:@std/internal"
       ]
     },
-    "@std/async@1.0.8": {
-      "integrity": "c057c5211a0f1d12e7dcd111ab430091301b8d64b4250052a79d277383bc3ba7"
+    "@std/async@1.0.9": {
+      "integrity": "c6472fd0623b3f3daae023cdf7ca5535e1b721dfbf376562c0c12b3fb4867f91"
     },
     "@std/data-structures@1.0.4": {
       "integrity": "fa0e20c11eb9ba673417450915c750a0001405a784e2a4e0c3725031681684a0"
     },
-    "@std/expect@1.0.7": {
-      "integrity": "3904afa77cfe5c45dd2cd2c476e6fc5b6f57103d712890f0783d74c19d4b05a9",
+    "@std/expect@1.0.8": {
+      "integrity": "27e40d8f3aefb372fc6a703fb0b69e34560e72a2f78705178babdffa00119a5f",
       "dependencies": [
-        "jsr:@std/assert@^1.0.7",
+        "jsr:@std/assert@^1.0.8",
         "jsr:@std/internal"
       ]
     },
-    "@std/fs@1.0.5": {
-      "integrity": "41806ad6823d0b5f275f9849a2640d87e4ef67c51ee1b8fb02426f55e02fd44e",
+    "@std/fs@1.0.6": {
+      "integrity": "42b56e1e41b75583a21d5a37f6a6a27de9f510bcd36c0c85791d685ca0b85fa2",
       "dependencies": [
-        "jsr:@std/path@^1.0.7"
+        "jsr:@std/path"
       ]
     },
     "@std/internal@1.0.5": {
@@ -59,15 +50,15 @@
     "@std/path@1.0.8": {
       "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
     },
-    "@std/testing@1.0.4": {
-      "integrity": "ca1368d720b183f572d40c469bb9faf09643ddd77b54f8b44d36ae6b94940576",
+    "@std/testing@1.0.5": {
+      "integrity": "6e693cbec94c81a1ad3df668685c7ba8e20742bb10305bc7137faa5cf16d2ec4",
       "dependencies": [
-        "jsr:@std/assert@^1.0.7",
+        "jsr:@std/assert@^1.0.8",
         "jsr:@std/async",
         "jsr:@std/data-structures",
         "jsr:@std/fs",
         "jsr:@std/internal",
-        "jsr:@std/path@^1.0.8"
+        "jsr:@std/path"
       ]
     }
   },
@@ -94,11 +85,18 @@
     "@ioredis/commands@1.2.0": {
       "integrity": "sha512-Sx1pU8EM64o2BrqNpEO1CNLtKQwyhuXuqyfH7oGKCk+1a33d2r5saW8zNwm3j6BTExtjrv2BxTgzzkMwts6vGg=="
     },
-    "@plandek-utils/ts-parse-dayjs@5.1.0": {
-      "integrity": "sha512-pUGSIs75EENVP2gFTfLxmuVX45oQMpTxGbnLMnPdGI1HLf3EEfFjzGDhsx27NbKEEve88r7N3JIqoepUjEv0og==",
+    "@plandek-utils/plain-object@1.1.0_zod@3.23.8": {
+      "integrity": "sha512-H8xrxqfPgwmiY6x+hLtdf14F/rQyjbEK6k+AsMGnPxGoMI1uSn6q8v98o6OwL+vnWvtm94v6x5bkkh2mmq961w==",
+      "dependencies": [
+        "@plandek-utils/ts-parse-dayjs",
+        "zod"
+      ]
+    },
+    "@plandek-utils/ts-parse-dayjs@6.0.0_zod@3.23.8": {
+      "integrity": "sha512-6M5eIUDUjXNutlDKa/2/rnCNXuEZGkmSEYjZkE/c5tOwuyfmPeLxdXt8wtPuxZoDheXgtWHVGE4L10YU2AX5NQ==",
       "dependencies": [
         "dayjs",
-        "lodash"
+        "zod"
       ]
     },
     "@types/ioredis-mock@8.2.5": {
@@ -175,9 +173,6 @@
     "lodash.isarguments@3.1.0": {
       "integrity": "sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg=="
     },
-    "lodash@4.17.21": {
-      "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
-    },
     "lru-cache@10.4.3": {
       "integrity": "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ=="
     },
@@ -216,16 +211,19 @@
     },
     "undici-types@6.19.8": {
       "integrity": "sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw=="
+    },
+    "zod@3.23.8": {
+      "integrity": "sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g=="
     }
   },
   "workspace": {
     "dependencies": [
-      "jsr:@plandek-utils/plain-object@0.2.3",
-      "jsr:@std/assert@1.0.7",
-      "jsr:@std/expect@1.0.7",
-      "jsr:@std/testing@1.0.4",
+      "jsr:@std/assert@1.0.8",
+      "jsr:@std/expect@1.0.8",
+      "jsr:@std/testing@1.0.5",
       "npm:@apollo/utils.keyvaluecache@3.1.0",
       "npm:@eturino/ioredis-del-by-pattern@2.0.1",
+      "npm:@plandek-utils/plain-object@1.1.0",
       "npm:@types/ioredis-mock@8.2.5",
       "npm:ioredis-mock@8.9.0",
       "npm:ioredis@5.4.1"
