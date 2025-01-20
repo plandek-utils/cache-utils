@@ -1,12 +1,19 @@
 # @plandek-utils/cache-utils
 
-[![JSR Scope](https://jsr.io/badges/@plandek-utils)](https://jsr.io/@plandek-utils)
-[![JSR](https://jsr.io/badges/@plandek-utils/cache-utils)](https://jsr.io/@plandek-utils/cache-utils)
-[![JSR Score](https://jsr.io/badges/@plandek-utils/cache-utils/score)](https://jsr.io/@plandek-utils/cache-utils)
+[![npm version](https://badge.fury.io/js/%40eturino%2Fcache-utils.svg)](https://badge.fury.io/js/%40eturino%2Fcache-utils)
+[![Node.js Version](https://img.shields.io/node/v/@eturino/cache-utils.svg)](https://nodejs.org)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f05fb327b37d0d69b030/maintainability)](https://codeclimate.com/github/plandek-utils/cache-utils/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/f05fb327b37d0d69b030/test_coverage)](https://codeclimate.com/github/plandek-utils/cache-utils/test_coverage)
 
 `CleanableRedisCache`, a `KeyValueCache`-compatible class, which allows for cleaning by pattern. It stores string values.
+
+## Installation
+
+```bash
+npm install @plandek-utils/cache-utils
+# or
+yarn add @plandek-utils/cache-utils
+```
 
 ## Usage
 
@@ -98,20 +105,31 @@ Look at [./src/__tests__/mod.spec.ts](./src/__tests__/mod.spec.ts) for examples.
 import { disconnectedCleanableRedisCache } from "@plandek-utils/cache-utils";
 
 // we can use ioredis-mock for mocking the Redis client
+import RedisMock from "ioredis-mock";
 
-// @ts-types="npm:@types/ioredis-mock"
-import redisMock from "ioredis-mock";
-
-const redis = new redisMock.default({...});
+const redis = new RedisMock({...});
 const cleanable = disconnectedCleanableRedisCache(redis);
 ```
 
 ## Development
 
-This package is developed with deno 2. The production code is in `src/mod.ts` and its test in
+This package is developed with Node.js and TypeScript. The production code is in `src/mod.ts` and its test in
 `src/__tests__/mod.spec.ts`
 
-- `deno fmt src`: format files
-- `deno lint src`: lint files
-- `deno run ci`: run the tests with coverage, then convert to lcov and prepare in
-  `html_cov` an HTML export of the coverage info.
+- `npm run fix`: format and lint files
+- `npm run check`: type check and lint files
+- `npm test`: run tests
+- `npm run test:coverage`: run tests with coverage report
+- `npm run build`: build the package
+- `npm run prepare-release`: run all checks, tests and build before release
+
+## Creating a New Version
+
+This project uses [light-release](https://github.com/plandek-utils/light-release) for versioning. To create a new version:
+
+1. Make your changes and commit them following conventional commit format
+2. Run `npm run prepare-release` to ensure all checks pass
+3. Use `npx light-release` to create a new version. This will:
+   - Generate release notes
+   - Update version in package.json
+   - Create a version commit and tag

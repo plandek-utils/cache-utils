@@ -9,7 +9,7 @@
   "squashIntoSingleVersioning": true,
   "showCommitImpact": true,
   "showAuthorLinks": true,
-  "versionFileName": "deno.json",
+  "versionFileName": "package.json",
   "defaultImpactThresholds": {
     "low": 1,
     "medium": 5,
