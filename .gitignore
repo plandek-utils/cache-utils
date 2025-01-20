@@ -6,5 +6,4 @@
 /coverage.lcov
 /html_cov
 /tmp_cov
-dist
 node_modules

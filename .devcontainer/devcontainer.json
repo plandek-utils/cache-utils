@@ -1,7 +1,7 @@
 {
-  "name": "Deno",
+  "name": "Node.js & TypeScript",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm"
   },
 
   // Features to add to the dev container. More info: https://containers.dev/features.
@@ -17,14 +17,14 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "justjavac.vscode-deno-extensionpack",
-        "mikestead.dotenv",
+        "biomejs.biome",
+        "idered.npm",
+        "talljack.vscode-package-version",
+        "vitest.explorer",
         "streetsidesoftware.code-spell-checker",
-        "ms-azuretools.vscode-docker",
         "EditorConfig.EditorConfig",
-        "GitHub.copilot",
-        "phind.phind",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "phind.phind"
       ]
     }
   }

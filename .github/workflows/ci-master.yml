@@ -1,0 +1,51 @@
+name: CI Master
+on:
+  push:
+    branches: [master, main]
+
+jobs:
+  test_and_publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      packages: write # allow GITHUB_TOKEN to publish packages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org/"
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run checks
+        run: npm run check
+
+      - name: Run release-please
+        id: release_please
+        uses: googleapis/release-please-action@v4
+        with:
+          release-type: node
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build package
+        run: npm run build
+
+      - name: Publish to npm using JS-DevTools/npm-publish (if not released already)
+        uses: JS-DevTools/npm-publish@v3
+        id: publish
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+
+      - if: ${{ steps.publish.outputs.type }}
+        run: echo "Version changed!"
