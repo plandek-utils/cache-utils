@@ -1,5 +1,5 @@
 import type { KeyValueCache, KeyValueCacheSetOptions } from "@apollo/utils.keyvaluecache";
-import { redisDelByPattern, RedisDeletionMethod } from "@eturino/ioredis-del-by-pattern";
+import { RedisDeletionMethod, redisDelByPattern } from "@eturino/ioredis-del-by-pattern";
 import type { PlainObject } from "@plandek-utils/plain-object";
 import type { Redis } from "ioredis";
 
@@ -95,9 +95,10 @@ export class CleanableRedisCache implements KeyValueCache<string> {
    *
    * @param givenKey Key to identify the cache entry
    */
-  public async delete(givenKey: string): Promise<void> {
+  public async delete(givenKey: string): Promise<boolean | undefined> {
     const key = this.finalKeyFor(givenKey);
-    await this.redis.unlink(key);
+    const result = await this.redis.unlink(key);
+    return result > 0 ? true : undefined;
   }
 
   /**
@@ -231,8 +232,10 @@ export class PlainObjectCache implements KeyValueCache<PlainObject> {
    * @param key
    * @returns
    */
-  public delete(key: string): Promise<boolean | void> {
-    return this.cache.delete(key);
+  public async delete(key: string): Promise<boolean | undefined> {
+    const result = await this.cache.delete(key);
+    // Ensure we return either boolean or undefined, not void
+    return typeof result === "boolean" ? result : undefined;
   }
 }
 
@@ -260,8 +263,8 @@ export class NoOpCache<T = unknown> implements KeyValueCache<T> {
    * Does nothing
    * @returns Promise<void>
    */
-  delete(_key: string): Promise<boolean | void> {
-    return Promise.resolve();
+  delete(_key: string): Promise<boolean | undefined> {
+    return Promise.resolve(false);
   }
 }
 

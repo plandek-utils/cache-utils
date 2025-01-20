@@ -1,12 +1,8 @@
-import { describe, it, expect, vi } from "vitest";
-import RedisMock from "ioredis-mock";
 import type { RedisDelByPatternOptions } from "@eturino/ioredis-del-by-pattern";
+import RedisMock from "ioredis-mock";
+import { describe, expect, it, vi } from "vitest";
 import type { DelFn } from "../mod.ts";
-import {
-  disconnectedCleanableRedisCache,
-  NoOpCache,
-  PlainObjectCache,
-} from "../mod.ts";
+import { NoOpCache, PlainObjectCache, disconnectedCleanableRedisCache } from "../mod.ts";
 
 const JSON_VALUE = { foo: "bar" };
 const JSON_VALUE_SERIALISED = JSON.stringify(JSON_VALUE);
@@ -16,17 +12,13 @@ function buildRedisStubbed(
     expectSet?: boolean;
     expectGet?: "with-value" | "with-json" | "without-value" | false;
     expectDel?: boolean;
-  } = {}
+  } = {},
 ) {
   const redis = new RedisMock();
 
   const setStub = vi
     .spyOn(redis, "set")
-    .mockImplementation(
-      opts.expectSet
-        ? () => Promise.resolve("OK")
-        : () => Promise.reject("should not be called")
-    );
+    .mockImplementation(opts.expectSet ? () => Promise.resolve("OK") : () => Promise.reject("should not be called"));
 
   const getStub = vi
     .spyOn(redis, "get")
@@ -34,19 +26,15 @@ function buildRedisStubbed(
       opts.expectGet === "with-value"
         ? () => Promise.resolve("VALUE")
         : opts.expectGet === "with-json"
-        ? () => Promise.resolve(JSON_VALUE_SERIALISED)
-        : opts.expectGet === "without-value"
-        ? () => Promise.resolve(null)
-        : () => Promise.reject("should not be called")
+          ? () => Promise.resolve(JSON_VALUE_SERIALISED)
+          : opts.expectGet === "without-value"
+            ? () => Promise.resolve(null)
+            : () => Promise.reject("should not be called"),
     );
 
   const delStub = vi
     .spyOn(redis, "unlink")
-    .mockImplementation(
-      opts.expectDel
-        ? () => Promise.resolve(3)
-        : () => Promise.reject("should not be called")
-    );
+    .mockImplementation(opts.expectDel ? () => Promise.resolve(3) : () => Promise.reject("should not be called"));
 
   return {
     redis,
@@ -81,12 +69,7 @@ describe("CleanableRedisCache", () => {
       const redisStubs = buildRedisStubbed({ expectSet: true });
       const crc = disconnectedCleanableRedisCache(redisStubs.redis);
       await crc.set("key", "value");
-      expect(redisStubs.setStub).toHaveBeenCalledWith(
-        "<test>key",
-        "value",
-        "PX",
-        0
-      );
+      expect(redisStubs.setStub).toHaveBeenCalledWith("<test>key", "value", "PX", 0);
       redisStubs.cleanup();
     });
 
@@ -94,12 +77,7 @@ describe("CleanableRedisCache", () => {
       const redisStubs = buildRedisStubbed({ expectSet: true });
       const crc = disconnectedCleanableRedisCache(redisStubs.redis);
       await crc.set("key", "value", { ttl: 10 });
-      expect(redisStubs.setStub).toHaveBeenCalledWith(
-        "<test>key",
-        "value",
-        "PX",
-        10_000
-      );
+      expect(redisStubs.setStub).toHaveBeenCalledWith("<test>key", "value", "PX", 10_000);
       redisStubs.cleanup();
     });
   });
@@ -190,12 +168,7 @@ describe("PlainObjectCache", () => {
 
       await cache.set("key", JSON_VALUE);
 
-      expect(redisStubs.setStub).toHaveBeenCalledWith(
-        "<test>key",
-        JSON_VALUE_SERIALISED,
-        "PX",
-        0
-      );
+      expect(redisStubs.setStub).toHaveBeenCalledWith("<test>key", JSON_VALUE_SERIALISED, "PX", 0);
       redisStubs.cleanup();
     });
   });

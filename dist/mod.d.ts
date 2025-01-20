@@ -66,7 +66,7 @@ export declare class CleanableRedisCache implements KeyValueCache<string> {
      *
      * @param givenKey Key to identify the cache entry
      */
-    delete(givenKey: string): Promise<void>;
+    delete(givenKey: string): Promise<boolean | undefined>;
     /**
      * Sets a value in the cache for the given key, using `redis.set` with `PX`.
      *
@@ -147,7 +147,7 @@ export declare class PlainObjectCache implements KeyValueCache<PlainObject> {
      * @param key
      * @returns
      */
-    delete(key: string): Promise<boolean | void>;
+    delete(key: string): Promise<boolean | undefined>;
 }
 /**
  * KeyValueCache that does nothing, useful for tests or to disable cache with minimal impact.
@@ -167,6 +167,6 @@ export declare class NoOpCache<T = unknown> implements KeyValueCache<T> {
      * Does nothing
      * @returns Promise<void>
      */
-    delete(_key: string): Promise<boolean | void>;
+    delete(_key: string): Promise<boolean | undefined>;
 }
 export {};

@@ -7,9 +7,17 @@ jobs:
   test_and_publish:
     runs-on: ubuntu-latest
     permissions:
+      attestations: write
+      checks: read
       contents: write
-      pull-requests: write
+      deployments: write
+      id-token: write
+      issues: write
       packages: write # allow GITHUB_TOKEN to publish packages
+      pull-requests: write
+      repository-projects: write
+      statuses: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,7 +34,7 @@ jobs:
           git config --global user.name "GitHub Actions"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run checks
         run: npm run check
@@ -36,7 +44,8 @@ jobs:
         uses: googleapis/release-please-action@v4
         with:
           release-type: node
-          token: ${{ secrets.GITHUB_TOKEN }}
+          skip-github-release: false
+          skip-github-pull-request: false
 
       - name: Build package
         run: npm run build
@@ -46,6 +55,7 @@ jobs:
         id: publish
         with:
           token: ${{ secrets.NPM_TOKEN }}
+          access: public
 
       - if: ${{ steps.publish.outputs.type }}
         run: echo "Version changed!"
