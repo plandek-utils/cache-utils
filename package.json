@@ -1,5 +1,5 @@
 {
-  "name": "@eturino/cache-utils",
+  "name": "@plandek-utils/cache-utils",
   "version": "1.0.1",
   "description": "Redis cache utilities with pattern-based cleaning capabilities",
   "main": "dist/mod.js",
@@ -35,12 +35,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eturino/cache-utils.git"
+    "url": "git+https://github.com/plandek-utils/cache-utils.git"
   },
   "bugs": {
-    "url": "https://github.com/eturino/cache-utils/issues"
+    "url": "https://github.com/plandek-utils/cache-utils/issues"
   },
-  "homepage": "https://github.com/eturino/cache-utils#readme",
+  "homepage": "https://github.com/plandek-utils/cache-utils#readme",
   "peerDependencies": {
     "@apollo/utils.keyvaluecache": "^3.1.0",
     "@eturino/ioredis-del-by-pattern": "^2.0.1",
