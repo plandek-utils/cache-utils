@@ -113,8 +113,8 @@ const cleanable = disconnectedCleanableRedisCache(redis);
 
 ## Development
 
-This package is developed with Node.js and TypeScript. The production code is in `src/mod.ts` and its test in
-`src/__tests__/mod.spec.ts`
+This package is developed with Node.js and TypeScript. The production code is in `src/index.ts` and its test in
+`src/__tests__/index.spec.ts`
 
 - `npm run fix`: format and lint files
 - `npm run check`: type check and lint files

@@ -1,4 +1,4 @@
-// src/mod.ts
+// src/index.ts
 import { RedisDeletionMethod, redisDelByPattern } from "@eturino/ioredis-del-by-pattern";
 function clientMainCachePrefix(clientKey) {
   return `ck-${clientKey}|`;
@@ -199,4 +199,4 @@ export {
   clientMainCachePrefix,
   disconnectedCleanableRedisCache
 };
-//# sourceMappingURL=mod.js.map
+//# sourceMappingURL=index.mjs.map

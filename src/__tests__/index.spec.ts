@@ -1,8 +1,8 @@
 import type { RedisDelByPatternOptions } from "@eturino/ioredis-del-by-pattern";
 import RedisMock from "ioredis-mock";
 import { describe, expect, it, vi } from "vitest";
-import type { DelFn } from "../mod.ts";
-import { NoOpCache, PlainObjectCache, disconnectedCleanableRedisCache } from "../mod.ts";
+import type { DelFn } from "..";
+import { NoOpCache, PlainObjectCache, disconnectedCleanableRedisCache } from "..";
 
 const JSON_VALUE = { foo: "bar" };
 const JSON_VALUE_SERIALISED = JSON.stringify(JSON_VALUE);

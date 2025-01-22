@@ -17,16 +17,16 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// src/mod.ts
-var mod_exports = {};
-__export(mod_exports, {
+// src/index.ts
+var index_exports = {};
+__export(index_exports, {
   CleanableRedisCache: () => CleanableRedisCache,
   NoOpCache: () => NoOpCache,
   PlainObjectCache: () => PlainObjectCache,
   clientMainCachePrefix: () => clientMainCachePrefix,
   disconnectedCleanableRedisCache: () => disconnectedCleanableRedisCache
 });
-module.exports = __toCommonJS(mod_exports);
+module.exports = __toCommonJS(index_exports);
 var import_ioredis_del_by_pattern = require("@eturino/ioredis-del-by-pattern");
 function clientMainCachePrefix(clientKey) {
   return `ck-${clientKey}|`;
@@ -228,4 +228,4 @@ function isNil(value) {
   clientMainCachePrefix,
   disconnectedCleanableRedisCache
 });
-//# sourceMappingURL=mod.cjs.map
+//# sourceMappingURL=index.js.map
