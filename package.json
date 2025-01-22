@@ -43,7 +43,7 @@
   "homepage": "https://github.com/plandek-utils/cache-utils#readme",
   "peerDependencies": {
     "@apollo/utils.keyvaluecache": "^3.1.0",
-    "@eturino/ioredis-del-by-pattern": "^2.0.1",
+    "@eturino/ioredis-del-by-pattern": "^3.0.1",
     "ioredis": "^5.4.2"
   },
   "devDependencies": {
@@ -52,7 +52,7 @@
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@commitlint/cz-commitlint": "^19.6.1",
-    "@eturino/ioredis-del-by-pattern": "^2.0.1",
+    "@eturino/ioredis-del-by-pattern": "^3.0.1",
     "@plandek-utils/plain-object": "^1.1.0",
     "@types/node": "^22.10.7",
     "@vitest/coverage-v8": "^3.0.2",
