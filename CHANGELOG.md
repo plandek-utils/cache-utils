@@ -3,6 +3,13 @@
 ### Changes
 - Release notes generated for version [1.0.1](.release-notes/1.0.1/release.md)
 
+## [2.0.1](https://github.com/plandek-utils/cache-utils/compare/v2.0.0...v2.0.1) (2025-01-31)
+
+
+### Bug Fixes
+
+* update deps ([d23dc0d](https://github.com/plandek-utils/cache-utils/commit/d23dc0ddc2278d0d79c4ce912f343d747ceacaaa))
+
 ## 2.0.0 (2025-01-22)
 
 

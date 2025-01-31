@@ -1,6 +1,6 @@
 {
   "name": "@plandek-utils/cache-utils",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Redis cache utilities with pattern-based cleaning capabilities",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
