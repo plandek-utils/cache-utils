@@ -1,5 +1,5 @@
 import type { KeyValueCache, KeyValueCacheSetOptions } from "@apollo/utils.keyvaluecache";
-import { RedisDeletionMethod, redisDelByPattern } from "@eturino/ioredis-del-by-pattern";
+import { type LogFn, RedisDeletionMethod, redisDelByPattern } from "@eturino/ioredis-del-by-pattern";
 import type { PlainObject } from "@plandek-utils/plain-object";
 import type { Redis } from "ioredis";
 
@@ -46,6 +46,21 @@ type ConstructorParams = {
    * If true, it will be sent to the delFn when cleaning the cache
    */
   enableLog: boolean;
+
+  /**
+   * function to execute to log events. Defaults to (console.log).
+   */
+  logFn?: LogFn;
+
+  /**
+   * function to execute to log events for warn. Defaults to (console.warn).
+   */
+  logWarnFn?: LogFn;
+
+  /**
+   * prefix to the logFn (defaults to "[REDIS-DEL-BY-PATTERN] ").
+   */
+  logPrefix?: string;
 };
 
 /**
@@ -57,13 +72,19 @@ export class CleanableRedisCache implements KeyValueCache<string> {
   readonly keyPrefix: string;
   readonly defaultCacheTTL: number;
   readonly enableLog: boolean;
+  readonly logFn?: LogFn;
+  readonly logWarnFn?: LogFn;
+  readonly logPrefix?: string;
 
   constructor(opts: ConstructorParams) {
-    const { delFn, enableLog, keyPrefix, defaultTTLSeconds, redis } = opts;
+    const { delFn, enableLog, keyPrefix, defaultTTLSeconds, redis, logFn, logWarnFn, logPrefix } = opts;
     this.redis = redis;
     this.keyPrefix = keyPrefix;
     this.defaultCacheTTL = defaultTTLSeconds;
     this.enableLog = enableLog;
+    this.logFn = logFn;
+    this.logWarnFn = logWarnFn;
+    this.logPrefix = logPrefix;
 
     this.delFn = delFn || redisDelByPattern;
   }
@@ -177,6 +198,9 @@ export class CleanableRedisCache implements KeyValueCache<string> {
       deletionMethod: RedisDeletionMethod.unlink,
       withPipeline: true,
       enableLog: this.enableLog,
+      logPrefix: this.logPrefix,
+      logFn: this.logFn,
+      logWarnFn: this.logWarnFn,
     });
   }
 

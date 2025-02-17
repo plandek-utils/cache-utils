@@ -37,12 +37,18 @@ var CleanableRedisCache = class {
   keyPrefix;
   defaultCacheTTL;
   enableLog;
+  logFn;
+  logWarnFn;
+  logPrefix;
   constructor(opts) {
-    const { delFn, enableLog, keyPrefix, defaultTTLSeconds, redis } = opts;
+    const { delFn, enableLog, keyPrefix, defaultTTLSeconds, redis, logFn, logWarnFn, logPrefix } = opts;
     this.redis = redis;
     this.keyPrefix = keyPrefix;
     this.defaultCacheTTL = defaultTTLSeconds;
     this.enableLog = enableLog;
+    this.logFn = logFn;
+    this.logWarnFn = logWarnFn;
+    this.logPrefix = logPrefix;
     this.delFn = delFn || import_ioredis_del_by_pattern.redisDelByPattern;
   }
   /**
@@ -143,7 +149,10 @@ var CleanableRedisCache = class {
       redis: this.redis,
       deletionMethod: import_ioredis_del_by_pattern.RedisDeletionMethod.unlink,
       withPipeline: true,
-      enableLog: this.enableLog
+      enableLog: this.enableLog,
+      logPrefix: this.logPrefix,
+      logFn: this.logFn,
+      logWarnFn: this.logWarnFn
     });
   }
   finalKeyFor(key) {

@@ -7,3 +7,4 @@
 /html_cov
 /tmp_cov
 node_modules
+package-lock.json
