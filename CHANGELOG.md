@@ -3,6 +3,13 @@
 ### Changes
 - Release notes generated for version [1.0.1](.release-notes/1.0.1/release.md)
 
+## [2.1.0](https://github.com/plandek-utils/cache-utils/compare/v2.0.1...v2.1.0) (2025-02-17)
+
+
+### Features
+
+* allow to pass logFn, logWarnFn, and logPrefix ([1035b77](https://github.com/plandek-utils/cache-utils/commit/1035b774cdeb26f5cf122d6f12a64849fc8be692))
+
 ## [2.0.1](https://github.com/plandek-utils/cache-utils/compare/v2.0.0...v2.0.1) (2025-01-31)
 
 
