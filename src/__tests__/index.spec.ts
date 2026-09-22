@@ -82,6 +82,31 @@ describe("CleanableRedisCache", () => {
     });
   });
 
+  describe("#setWithoutExpiry()", () => {
+    it("does nothing with undefined", async () => {
+      const redisStubs = buildRedisStubbed();
+      const crc = disconnectedCleanableRedisCache(redisStubs.redis);
+      await crc.setWithoutExpiry("key", undefined as unknown as string);
+      redisStubs.cleanup();
+    });
+
+    it("calls set with no expiry arguments", async () => {
+      const redisStubs = buildRedisStubbed({ expectSet: true });
+      const crc = disconnectedCleanableRedisCache(redisStubs.redis);
+      await crc.setWithoutExpiry("key", "value");
+      expect(redisStubs.setStub).toHaveBeenCalledWith("<test>key", "value");
+      redisStubs.cleanup();
+    });
+
+    it("applies the key prefix like every other operation", async () => {
+      const redisStubs = buildRedisStubbed({ expectSet: true });
+      const crc = disconnectedCleanableRedisCache(redisStubs.redis);
+      await crc.setWithoutExpiry("some|nested|key", "value");
+      expect(redisStubs.setStub).toHaveBeenCalledWith("<test>some|nested|key", "value");
+      redisStubs.cleanup();
+    });
+  });
+
   describe("#get()", () => {
     it("with value", async () => {
       const redisStubs = buildRedisStubbed({ expectGet: "with-value" });

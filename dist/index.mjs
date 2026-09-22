@@ -73,6 +73,27 @@ var CleanableRedisCache = class {
     await this.redis.set(key, value, "PX", ttlSeconds * 1e3);
   }
   /**
+   * Sets a value in the cache for the given key with NO expiry, using `redis.set` without `PX`.
+   * The key persists until it is overwritten or deleted.
+   *
+   * Intended for a last-known-good fallback that has to outlive the TTL'd entry it backs up.
+   * Prefer `set()` otherwise: an entry that never expires will not be reclaimed on its own.
+   *
+   * Calls `finalKeyFor` to get the final key to be used in REDIS.
+   *
+   * It does nothing if the value is `undefined`.
+   *
+   * @param givenKey Key to identify the cache entry
+   * @param value Value to be stored in the cache
+   */
+  async setWithoutExpiry(givenKey, value) {
+    if (typeof value === "undefined") {
+      return;
+    }
+    const key = this.finalKeyFor(givenKey);
+    await this.redis.set(key, value);
+  }
+  /**
    * Clears all the cache entries for this cache.
    */
   clearAll() {
@@ -146,6 +167,7 @@ var PlainObjectCache = class {
   constructor(cache) {
     this.cache = cache;
   }
+  cache;
   /**
    * Calls `cache.get` with the given key and parses the value as JSON if it is truthy, undefined otherwise.
    * @param key

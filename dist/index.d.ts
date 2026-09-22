@@ -96,6 +96,21 @@ export declare class CleanableRedisCache implements KeyValueCache<string> {
      */
     set(givenKey: string, value: string, options?: KeyValueCacheSetOptions): Promise<void>;
     /**
+     * Sets a value in the cache for the given key with NO expiry, using `redis.set` without `PX`.
+     * The key persists until it is overwritten or deleted.
+     *
+     * Intended for a last-known-good fallback that has to outlive the TTL'd entry it backs up.
+     * Prefer `set()` otherwise: an entry that never expires will not be reclaimed on its own.
+     *
+     * Calls `finalKeyFor` to get the final key to be used in REDIS.
+     *
+     * It does nothing if the value is `undefined`.
+     *
+     * @param givenKey Key to identify the cache entry
+     * @param value Value to be stored in the cache
+     */
+    setWithoutExpiry(givenKey: string, value: string): Promise<void>;
+    /**
      * Clears all the cache entries for this cache.
      */
     clearAll(): Promise<number>;
